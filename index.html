@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShineWash Car Care</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      color: #172033;
+      background: #f5f9fc;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    nav {
+      background: #071a33;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 7%;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #20c4ff;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #20c4ff;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      padding: 80px 7%;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(3,20,40,.9), rgba(3,20,40,.45)),
+        url("https://images.unsplash.com/photo-1552933529-e359b2477252?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+    }
+
+    .hero-content {
+      max-width: 650px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.05;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: #20c4ff;
+    }
+
+    .hero p {
+      font-size: 19px;
+      margin-bottom: 30px;
+      color: #e3edf7;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 27px;
+      border-radius: 8px;
+      background: #20c4ff;
+      color: #071a33;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #fff;
+    }
+
+    /* General sections */
+    section {
+      padding: 80px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #687386;
+    }
+
+    /* Services */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .service-card {
+      background: white;
+      padding: 35px 25px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(20,40,70,.08);
+      transition: .3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .service-icon {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .service-card h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .service-card p {
+      color: #687386;
+    }
+
+    /* Pricing */
+    .pricing {
+      background: #071a33;
+      color: white;
+    }
+
+    .pricing .section-title p {
+      color: #b9c6d6;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .plan {
+      background: white;
+      color: #172033;
+      padding: 35px;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .plan.featured {
+      border: 4px solid #20c4ff;
+      transform: scale(1.04);
+    }
+
+    .plan h3 {
+      font-size: 24px;
+    }
+
+    .price {
+      font-size: 42px;
+      font-weight: bold;
+      color: #087fae;
+      margin: 15px 0;
+    }
+
+    .plan ul {
+      list-style: none;
+      margin: 25px 0;
+    }
+
+    .plan li {
+      margin: 10px 0;
+      color: #596578;
+    }
+
+    /* About */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about img {
+      width: 100%;
+      border-radius: 18px;
+    }
+
+    .about h2 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .about p {
+      color: #687386;
+      margin-bottom: 20px;
+    }
+
+    /* Booking */
+    .booking {
+      background: #eaf7fc;
+    }
+
+    .booking-box {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 18px;
+      box-shadow: 0 10px 40px rgba(20,40,70,.1);
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d6dde5;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+
+    form button {
+      width: 100%;
+    }
+
+    /* Footer */
+    footer {
+      background: #041225;
+      color: #b8c5d5;
+      padding: 45px 7%;
+      text-align: center;
+    }
+
+    footer .logo {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      nav ul {
+        display: none;
+      }
+
+      .services,
+      .plans,
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .plan.featured {
+        transform: none;
+      }
+
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
+
+      .hero {
+        min-height: 520px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">🚗 ShineWash</div>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#booking">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Give Your Car a <span>Fresh Shine.</span></h1>
+      <p>
+        Professional car washing and detailing that keeps your vehicle
+        looking its absolute best.
+      </p>
+
+      <a href="#booking" class="btn">Book a Wash →</a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="section-title">
+      <h2>Our Services</h2>
+      <p>Everything your car needs to stay clean and fresh.</p>
+    </div>
+
+    <div class="services">
+
+      <div class="service-card">
+        <div class="service-icon">💦</div>
+        <h3>Exterior Wash</h3>
+        <p>
+          Thorough exterior cleaning with premium soap, water rinse,
+          and hand drying.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">✨</div>
+        <h3>Full Detailing</h3>
+        <p>
+          Deep interior and exterior cleaning for a showroom-quality finish.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🛡️</div>
+        <h3>Wax & Protection</h3>
+        <p>
+          Add long-lasting shine and protection against dirt and weather.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="section-title">
+      <h2>Simple Pricing</h2>
+      <p>Choose the wash that's right for your vehicle.</p>
+    </div>
+
+    <div class="plans">
+
+      <div class="plan">
+        <h3>Basic Wash</h3>
+        <div class="price">$15</div>
+
+        <ul>
+          <li>✓ Exterior wash</li>
+          <li>✓ Wheel cleaning</li>
+          <li>✓ Hand dry</li>
+          <li>✓ Tire shine</li>
+        </ul>
+
+        <a href="#booking" class="btn">Choose Plan</a>
+      </div>
+
+      <div class="plan featured">
+        <h3>Premium Wash</h3>
+        <div class="price">$30</div>
+
+        <ul>
+          <li>✓ Everything in Basic</li>
+          <li>✓ Interior vacuum</li>
+          <li>✓ Dashboard cleaning</li>
+          <li>✓ Spray wax</li>
+        </ul>
+
+        <a href="#booking" class="btn">Choose Plan</a>
+      </div>
+
+      <div class="plan">
+        <h3>Full Detail</h3>
+        <div class="price">$65</div>
+
+        <ul>
+          <li>✓ Full exterior wash</li>
+          <li>✓ Deep interior clean</li>
+          <li>✓ Wax protection</li>
+          <li>✓ Tire & trim treatment</li>
+        </ul>
+
+        <a href="#booking" class="btn">Choose Plan</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about">
+
+      <img
+        src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1000&q=80"
+        alt="Car being washed"
+      >
+
+      <div>
+        <h2>More Than Just a Car Wash</h2>
+
+        <p>
+          At ShineWash, we believe your car deserves more than a quick rinse.
+          Our team uses professional equipment and quality products to deliver
+          a clean, glossy finish every time.
+        </p>
+
+        <p>
+          Fast service, friendly staff, and attention to detail are what make
+          ShineWash the perfect stop for your vehicle.
+        </p>
+
+        <a href="#booking" class="btn">Book Your Wash</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section class="booking" id="booking">
+
+    <div class="section-title">
+      <h2>Book Your Car Wash</h2>
+      <p>Fill out the form and we'll get you scheduled.</p>
+    </div>
+
+    <div class="booking-box">
+
+      <form onsubmit="bookWash(event)">
+
+        <div>
+          <label>Name</label>
+          <input type="text" placeholder="Your name" required>
+        </div>
+
+        <div>
+          <label>Phone</label>
+          <input type="tel" placeholder="Your phone number" required>
+        </div>
+
+        <div>
+          <label>Date</label>
+          <input type="date" required>
+        </div>
+
+        <div>
+          <label>Service</label>
+          <select required>
+            <option value="">Choose a service</option>
+            <option>Basic Wash - $15</option>
+            <option>Premium Wash - $30</option>
+            <option>Full Detail - $65</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label>Message</label>
+          <textarea placeholder="Any special requests?"></textarea>
+        </div>
+
+        <div class="full">
+          <button class="btn" type="submit">
+            Confirm Booking
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span class="logo">🚗 ShineWash</span>
+
+    <p>
+      Professional car washing & detailing.
+    </p>
+
+    <p style="margin-top:15px;">
+      © 2026 ShineWash. All rights reserved.
+    </p>
+  </footer>
+
+  <script>
+    function bookWash(event) {
+      event.preventDefault();
+
+      alert(
+        "Thanks for choosing ShineWash! Your booking request has been received."
+      );
+    }
+  </script>
+
+</body>
+</html>
